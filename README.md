@@ -1,23 +1,23 @@
 # OrthoAI v2 — AI-Assisted Clear Aligner Treatment Planning
 
-[![arXiv](https://img.shields.io/badge/arXiv-2603.00124v2-b31b1b.svg)](https://arxiv.org/abs/2603.00124)
+[![arXiv](https://img.shields.io/badge/arXiv-2603.15663-b31b1b.svg)](https://arxiv.org/abs/2603.15663)
 [![License: MIT](https://img.shields.io/badge/Open%20Components-MIT-green.svg)](LICENSE-MIT)
 [![License: Commercial](https://img.shields.io/badge/Engine-Commercial-blue.svg)](LICENSE-COMMERCIAL)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://python.org)
 
 **OrthoAI v2** is a dual-agent deep learning pipeline for AI-assisted orthodontic treatment
-planning with clear aligners. It extends [OrthoAI v1](https://arxiv.org/abs/2603.00124) by
+planning with clear aligners. It extends [OrthoAI v1](https://arxiv.org/abs/2603.15663) by
 adding a CHaRM landmark-detection agent, a six-category biomechanical scoring model, and a
 multi-frame 4D staging simulator.
 
 > Paper: *OrthoAI v2: From Single-Agent Segmentation to Dual-Agent Treatment Planning for
-> Clear Aligners* — Lansiaux E., STaR-AI / CHU de Lille, arXiv 2603.00124v2, March 2026.
+> Clear Aligners* — Lansiaux E., Leman M., arXiv 2603.15663, March 2026.
 
 ---
 
 ## What is and isn't in this repository
 
-This project follows an **open-core model** (à la OpenAI, Mistral, MongoDB):
+This project follows an **open-core model** :
 
 | Component | Status | License |
 |---|---|---|
@@ -38,8 +38,7 @@ This project follows an **open-core model** (à la OpenAI, Mistral, MongoDB):
 **Why this structure?**
 The academic contribution (architectures, evaluation protocol, benchmark) is fully reproducible
 from this repository. The *clinical calibration* — the exact biomechanical constants,
-composite scoring weights, and staging parameters — constitutes the proprietary IP of
-[Orthalytix SRL](https://orthalytix.com) and is licensed separately.
+composite scoring weights, and staging parameters — constitutes a proprietary IP and is licensed separately.
 
 This mirrors the model used by OpenAI (released GPT-2 architecture, not weights or RLHF
 pipeline), Mistral (released architecture + weights, not fine-tuning data), and MongoDB
@@ -73,7 +72,6 @@ full composite scoring) is available via:
 - **On-premise license** — Docker image with encrypted engine bundle
 - **Research license** — free for academic institutions, contact below
 
-→ [orthalytix.com/orthoai](https://orthalytix.com/orthoai) · hello@orthalytix.com
 
 ---
 
@@ -122,10 +120,10 @@ orthoai-v2/
 @article{lansiaux2026orthoaiv2,
   title   = {{OrthoAI} v2: From Single-Agent Segmentation to
              Dual-Agent Treatment Planning for Clear Aligners},
-  author  = {Lansiaux, Edouard},
-  journal = {arXiv preprint arXiv:2603.00124v2},
+  author  = {Lansiaux, Edouard; Leman, Margaux},
+  journal = {arXiv preprint arXiv:2603.15663},
   year    = {2026},
-  url     = {https://arxiv.org/abs/2603.00124}
+  url     = {https://arxiv.org/abs/2603.15663}
 }
 ```
 
@@ -133,9 +131,8 @@ If you use the v1 baseline in comparison:
 
 ```bibtex
 @article{lansiaux2026orthoaiv1,
-  title   = {{OrthoAI} v1: A Single-Agent Point-Cloud Pipeline for
-             {AI}-Assisted Orthodontic Treatment Planning},
-  author  = {Lansiaux, Edouard},
+  title   = {{OrthoAI}: A Neurosymbolic Framework for Evidence-Grounded Biomechanical Reasoning in Clear Aligner Orthodontics},
+  author  = {Lansiaux, Edouard; Leman, Margaux; Ammi, Mehdi},
   journal = {arXiv preprint arXiv:2603.00124},
   year    = {2026}
 }
