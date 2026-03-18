@@ -1,0 +1,78 @@
+[build-system]
+requires      = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name        = "orthoai"
+version     = "2.0.0"
+description = "OrthoAI v2 — Dual-agent clear aligner treatment planning (open components)"
+readme      = "README.md"
+license     = { file = "LICENSE-MIT" }
+authors     = [{ name = "Edouard Lansiaux", email = "edouard.lansiaux@univ-lille.fr" }]
+keywords    = ["orthodontics", "deep learning", "point clouds", "DGCNN", "CHaRM",
+               "treatment planning", "clear aligners"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.0",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "pydantic>=2.0",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "httpx>=0.27",        # for FastAPI test client
+    "ruff>=0.4",
+    "mypy>=1.9",
+]
+frontend = [
+    # Node/npm managed separately — see frontend/package.json
+]
+commercial = [
+    # Private PyPI — requires Orthalytix license key
+    # pip install orthoai-engine --index-url https://pypi.orthalytix.com/simple
+    # orthoai-engine>=2.0
+]
+
+[project.urls]
+Homepage   = "https://orthalytix.com/orthoai"
+Repository = "https://github.com/edouard-lansiaux/orthoai-v2"
+Paper      = "https://arxiv.org/abs/2603.00124"
+Issues     = "https://github.com/edouard-lansiaux/orthoai-v2/issues"
+
+[project.scripts]
+orthoai-eval = "scripts.evaluate:main"
+orthoai-api  = "api.main:app"
+
+[tool.setuptools.packages.find]
+where   = ["."]
+include = ["orthoai*", "engine_stub*", "api*"]
+
+[tool.ruff]
+target-version = "py310"
+line-length     = 100
+select          = ["E", "F", "I", "UP"]
+ignore          = ["E501"]
+
+[tool.mypy]
+python_version  = "3.10"
+ignore_missing_imports = true
+strict          = false
+
+[tool.pytest.ini_options]
+testpaths    = ["tests"]
+asyncio_mode = "auto"

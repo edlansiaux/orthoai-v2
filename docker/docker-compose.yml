@@ -1,0 +1,65 @@
+version: "3.9"
+
+# ── OrthoAI v2 — Docker Compose ───────────────────────────────────────────────
+#
+# Two profiles:
+#   open        — stub engine, for development and demo
+#   commercial  — production with Orthalytix licensed engine image
+#
+# Usage:
+#   docker compose --profile open up
+#   ORTHOAI_LICENSE_KEY=xxx docker compose --profile commercial up
+
+services:
+
+  # ── Open stack (MIT, no license required) ───────────────────────────────────
+  api-open:
+    profiles: [open]
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.open
+    ports:
+      - "8000:8000"
+    environment:
+      - LOG_LEVEL=info
+    volumes:
+      - ./data:/app/data:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── Commercial stack (requires Orthalytix license) ───────────────────────────
+  # Replace image with your licensed image URL from Orthalytix registry
+  api-commercial:
+    profiles: [commercial]
+    image: registry.orthalytix.com/orthoai-engine:2.0.0  # requires auth
+    ports:
+      - "8000:8000"
+    environment:
+      - ORTHOAI_LICENSE_KEY=${ORTHOAI_LICENSE_KEY}
+      - LOG_LEVEL=info
+    volumes:
+      - ./data:/app/data:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── Nginx reverse proxy (both profiles) ─────────────────────────────────────
+  nginx:
+    profiles: [open, commercial]
+    image: nginx:1.25-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./frontend/dist:/usr/share/nginx/html:ro
+    depends_on:
+      - api-open
+    restart: unless-stopped

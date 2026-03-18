@@ -1,0 +1,38 @@
+# OrthoAI v2 — Open stack Docker image (MIT, no commercial engine)
+# Serves the API with StubScorer for development and demo purposes.
+# For production with calibrated scoring, use the Orthalytix commercial image.
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# System deps
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies (CPU-only torch for small image)
+COPY pyproject.toml .
+RUN pip install --no-cache-dir \
+    "torch>=2.0" --index-url https://download.pytorch.org/whl/cpu \
+    && pip install --no-cache-dir \
+    "fastapi>=0.110" "uvicorn[standard]>=0.29" "pydantic>=2.0" "numpy>=1.26"
+
+# Copy source (NO weights, NO .env, NO commercial engine)
+COPY orthoai/ ./orthoai/
+COPY engine_stub/ ./engine_stub/
+COPY api/ ./api/
+
+# Frontend static files (optional — mount at runtime or build separately)
+# COPY frontend/dist/ ./frontend/dist/
+
+# Sanity check: assert no weight files slipped in
+RUN find . -name "*.pt" -o -name "*.onnx" -o -name "*.safetensors" | \
+    xargs -r sh -c 'echo "ERROR: weight file found in image: $@" && exit 1' _
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=10s \
+    CMD curl -f http://localhost:8000/api/health || exit 1
+
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]

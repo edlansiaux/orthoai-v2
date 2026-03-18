@@ -1,0 +1,69 @@
+COMMERCIAL LICENSE — Proprietary Engine Components
+
+Copyright (c) 2026 Orthalytix SRL (BE) / Edouard Lansiaux
+Registered: Tournai, Wallonie, Belgium
+
+──────────────────────────────────────────────────────────────────────────────
+
+PROPRIETARY COMPONENTS
+
+The following are NOT open-source and are owned exclusively by Orthalytix SRL:
+
+1. COMPOSITE SCORING ENGINE
+   The calibrated biomechanical scoring formula, including:
+   - Exact sub-score weighting coefficients (biomechanics, staging,
+     attachments, IPR, occlusion, predictability)
+   - Severity penalty multipliers and threshold values
+   - Grade assignment thresholds
+
+2. CLINICAL MOVEMENT LIMIT DATABASE
+   The per-tooth-type movement limits and predictability scores derived
+   from proprietary analysis of the clinical literature and internal
+   calibration studies. While the general framework is described in the
+   published manuscript (arXiv:2603.00124v2), the precise numerical
+   parameters are proprietary.
+
+3. STAGING RULE PARAMETERS
+   Extrusion deferral thresholds, over-engineering factors, per-aligner
+   movement budgets, and anchorage loss heuristics.
+
+4. PRE-TRAINED MODEL WEIGHTS
+   All checkpoint files (.pt, .onnx, .safetensors) produced by training
+   DGCNN or CHaRM on dental scan datasets.
+
+5. TRAINING PIPELINE
+   Data preprocessing pipelines, augmentation strategies, training
+   schedules, curriculum learning configurations, and fine-tuning
+   procedures used to produce the production model weights.
+
+──────────────────────────────────────────────────────────────────────────────
+
+LICENSING OPTIONS
+
+A. SaaS API Access
+   Access the production engine via api.orthalytix.com/v2.
+   Tiered pricing by monthly inference volume.
+   Free tier available for research (≤500 plans/month).
+
+B. On-Premise License
+   Docker image with AES-256 encrypted engine bundle.
+   Annual subscription. Suitable for hospital IT environments.
+
+C. Academic / Research License
+   Free for non-commercial academic use at accredited institutions.
+   Requires institutional email and publication acknowledgement.
+
+D. OEM / Integration License
+   For embedding OrthoAI v2 into third-party orthodontic software.
+   Custom pricing. Contact business@orthalytix.com.
+
+──────────────────────────────────────────────────────────────────────────────
+
+CONTACT
+
+hello@orthalytix.com
+https://orthalytix.com/orthoai
+Orthalytix SRL, Tournai, Wallonie, Belgium
+
+All rights reserved. Unauthorized use, reproduction, or distribution
+of the proprietary components listed above is strictly prohibited.
