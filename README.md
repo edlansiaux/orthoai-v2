@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/Open%20Components-MIT-green.svg)](LICENSE-MIT)
 [![License: Commercial](https://img.shields.io/badge/Engine-Commercial-blue.svg)](LICENSE-COMMERCIAL)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://python.org)
-
+  
 **OrthoAI v2** is a dual-agent deep learning pipeline for AI-assisted orthodontic treatment
 planning with clear aligners. It extends [OrthoAI v1](https://arxiv.org/abs/2603.15663) by
 adding a CHaRM landmark-detection agent, a six-category biomechanical scoring model, and a
