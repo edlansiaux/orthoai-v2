@@ -49,7 +49,7 @@ pipeline), Mistral (released architecture + weights, not fine-tuning data), and 
 ## Quick start (open components)
 
 ```bash
-git clone https://github.com/edouard-lansiaux/orthoai-v2
+git clone https://github.com/edlansiaux/orthoai-v2
 cd orthoai-v2
 pip install -e ".[dev]"
 
